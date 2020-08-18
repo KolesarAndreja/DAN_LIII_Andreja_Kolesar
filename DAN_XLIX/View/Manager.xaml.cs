@@ -1,17 +1,6 @@
-﻿using DAN_XLIX.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DAN_XLIX.Service;
+using DAN_XLIX.ViewModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace DAN_XLIX.View
 {
@@ -20,10 +9,10 @@ namespace DAN_XLIX.View
     /// </summary>
     public partial class Manager : Window
     {
-        public Manager()
+        public Manager(tblManager man)
         {
             InitializeComponent();
-            //this.DataContext = new ManagerViewModel(this);
+            this.DataContext = new ManagerViewModel(this, man);
         }
     }
 }

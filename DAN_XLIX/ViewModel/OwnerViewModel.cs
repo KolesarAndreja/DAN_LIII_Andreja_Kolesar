@@ -138,19 +138,6 @@ namespace DAN_XLIX.ViewModel
                 OnPropertyChanged("engagement");
             }
         }
-
-        private string _currentPassword;
-        public string currentPassword
-        {
-            get
-            {
-                return _currentPassword;
-            }
-            set
-            {
-                _currentPassword = value;
-            }
-        }
         #endregion
 
         #region constructor
@@ -288,7 +275,7 @@ namespace DAN_XLIX.ViewModel
         {
             try
             {
-                currentPassword = (obj as PasswordBox).Password;
+                string currentPassword = (obj as PasswordBox).Password;
                 newEmployee.password = currentPassword;
                 tblUser e = Service.Service.AddUser(newEmployee);
                 newManager.userId = e.userId;
@@ -313,7 +300,7 @@ namespace DAN_XLIX.ViewModel
         {
             if (!String.IsNullOrEmpty(newEmployee.fullname) && !String.IsNullOrEmpty(newEmployee.email) && !String.IsNullOrEmpty(newEmployee.username) && qualification.id!=0)
             {
-                currentPassword = (obj as PasswordBox).Password;
+                string currentPassword = (obj as PasswordBox).Password;
                 if (!String.IsNullOrEmpty(currentPassword))
                     return true;
                 else
@@ -332,7 +319,7 @@ namespace DAN_XLIX.ViewModel
             {
                 if (_save2 == null)
                 {
-                    _save2 = new RelayCommand(SaveExecute, CanSaveExecute);
+                    _save2 = new RelayCommand(Save2Execute, CanSave2Execute);
                 }
                 return _save2;
             }
@@ -342,8 +329,8 @@ namespace DAN_XLIX.ViewModel
         {
             try
             {
-                currentPassword = (obj as PasswordBox).Password;
-                newEmployee.password = currentPassword;
+                string currentPassword2 = (obj as PasswordBox).Password;
+                newEmployee.password = currentPassword2;
                 tblUser e = Service.Service.AddUser(newEmployee);
                 newStaff.userId = e.userId;
                 newStaff.genderId = gender.id;
@@ -368,8 +355,8 @@ namespace DAN_XLIX.ViewModel
         {
             if (!String.IsNullOrEmpty(newEmployee.fullname) && !String.IsNullOrEmpty(newEmployee.email) && !String.IsNullOrEmpty(newEmployee.username) && !String.IsNullOrEmpty(newStaff.citizenship) && gender.id!=0 && engagement.id!=0)
             {
-                currentPassword = (obj as PasswordBox).Password;
-                if (!String.IsNullOrEmpty(currentPassword))
+                string currentPassword2 = (obj as PasswordBox).Password;
+                if (!String.IsNullOrEmpty(currentPassword2))
                     return true;
                 else
                     return false;
