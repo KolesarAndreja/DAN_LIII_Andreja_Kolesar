@@ -1,0 +1,665 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbHotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblAbsence">
+          <Key>
+            <PropertyRef Name="absenceId" />
+          </Key>
+          <Property Name="absenceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstDay" Type="date" Nullable="false" />
+          <Property Name="lastDay" Type="date" Nullable="false" />
+          <Property Name="reason" Type="varchar" MaxLength="50" />
+          <Property Name="statusId" Type="int" />
+          <Property Name="staffId" Type="int" />
+        </EntityType>
+        <EntityType Name="tblEngagement">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblGender">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblManager">
+          <Key>
+            <PropertyRef Name="managerId" />
+          </Key>
+          <Property Name="managerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="floorNumber" Type="int" Nullable="false" />
+          <Property Name="workExperience" Type="int" />
+          <Property Name="qualificationId" Type="int" />
+          <Property Name="userId" Type="int" />
+        </EntityType>
+        <EntityType Name="tblProfessionalQualifications">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="char" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblStaff">
+          <Key>
+            <PropertyRef Name="staffId" />
+          </Key>
+          <Property Name="staffId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="citizenship" Type="varchar" MaxLength="30" />
+          <Property Name="salary" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="floorNumber" Type="int" Nullable="false" />
+          <Property Name="engegamentId" Type="int" />
+          <Property Name="genderId" Type="int" />
+          <Property Name="userId" Type="int" />
+        </EntityType>
+        <EntityType Name="tblStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fullname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="dateOfBirth" Type="date" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="30" />
+          <Property Name="username" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbHotel.dbo.vwAbsence' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwAbsence">
+          <Key>
+            <PropertyRef Name="fullname" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="floorNumber" />
+            <PropertyRef Name="engagement" />
+            <PropertyRef Name="firstDay" />
+            <PropertyRef Name="lastDay" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="fullname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="floorNumber" Type="int" Nullable="false" />
+          <Property Name="engagement" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="firstDay" Type="date" Nullable="false" />
+          <Property Name="lastDay" Type="date" Nullable="false" />
+          <Property Name="reason" Type="varchar" MaxLength="50" />
+          <Property Name="status" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbHotel.dbo.vwStaff' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwStaff">
+          <Key>
+            <PropertyRef Name="fullname" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="dateOfBirth" />
+            <PropertyRef Name="password" />
+            <PropertyRef Name="floorNumber" />
+            <PropertyRef Name="engagement" />
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="fullname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="dateOfBirth" Type="date" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="30" />
+          <Property Name="password" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="floorNumber" Type="int" Nullable="false" />
+          <Property Name="engagement" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="salary" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="name" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblAbsenc__staff__79FD19BE">
+          <End Role="tblStaff" Type="Self.tblStaff" Multiplicity="0..1" />
+          <End Role="tblAbsence" Type="Self.tblAbsence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStaff">
+              <PropertyRef Name="staffId" />
+            </Principal>
+            <Dependent Role="tblAbsence">
+              <PropertyRef Name="staffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAbsenc__statu__7908F585">
+          <End Role="tblStatus" Type="Self.tblStatus" Multiplicity="0..1" />
+          <End Role="tblAbsence" Type="Self.tblAbsence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblAbsence">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblManage__quali__6E8B6712">
+          <End Role="tblProfessionalQualifications" Type="Self.tblProfessionalQualifications" Multiplicity="0..1" />
+          <End Role="tblManager" Type="Self.tblManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProfessionalQualifications">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblManager">
+              <PropertyRef Name="qualificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblManage__userI__6F7F8B4B">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblManager" Type="Self.tblManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="tblManager">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblStaff__engega__725BF7F6">
+          <End Role="tblEngagement" Type="Self.tblEngagement" Multiplicity="0..1" />
+          <End Role="tblStaff" Type="Self.tblStaff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEngagement">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblStaff">
+              <PropertyRef Name="engegamentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblStaff__gender__73501C2F">
+          <End Role="tblGender" Type="Self.tblGender" Multiplicity="0..1" />
+          <End Role="tblStaff" Type="Self.tblStaff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGender">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblStaff">
+              <PropertyRef Name="genderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblStaff__userId__74444068">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblStaff" Type="Self.tblStaff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="tblStaff">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbHotelModelStoreContainer">
+          <EntitySet Name="tblAbsence" EntityType="Self.tblAbsence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEngagement" EntityType="Self.tblEngagement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblGender" EntityType="Self.tblGender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblManager" EntityType="Self.tblManager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProfessionalQualifications" EntityType="Self.tblProfessionalQualifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStaff" EntityType="Self.tblStaff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStatus" EntityType="Self.tblStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwAbsence" EntityType="Self.vwAbsence" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwAbsence].[fullname] AS [fullname], 
+    [vwAbsence].[username] AS [username], 
+    [vwAbsence].[floorNumber] AS [floorNumber], 
+    [vwAbsence].[engagement] AS [engagement], 
+    [vwAbsence].[firstDay] AS [firstDay], 
+    [vwAbsence].[lastDay] AS [lastDay], 
+    [vwAbsence].[reason] AS [reason], 
+    [vwAbsence].[status] AS [status]
+    FROM [dbo].[vwAbsence] AS [vwAbsence]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwStaff" EntityType="Self.vwStaff" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwStaff].[fullname] AS [fullname], 
+    [vwStaff].[username] AS [username], 
+    [vwStaff].[dateOfBirth] AS [dateOfBirth], 
+    [vwStaff].[email] AS [email], 
+    [vwStaff].[password] AS [password], 
+    [vwStaff].[floorNumber] AS [floorNumber], 
+    [vwStaff].[engagement] AS [engagement], 
+    [vwStaff].[salary] AS [salary], 
+    [vwStaff].[name] AS [name]
+    FROM [dbo].[vwStaff] AS [vwStaff]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__tblAbsenc__staff__79FD19BE" Association="Self.FK__tblAbsenc__staff__79FD19BE">
+            <End Role="tblStaff" EntitySet="tblStaff" />
+            <End Role="tblAbsence" EntitySet="tblAbsence" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAbsenc__statu__7908F585" Association="Self.FK__tblAbsenc__statu__7908F585">
+            <End Role="tblStatus" EntitySet="tblStatus" />
+            <End Role="tblAbsence" EntitySet="tblAbsence" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblManage__quali__6E8B6712" Association="Self.FK__tblManage__quali__6E8B6712">
+            <End Role="tblProfessionalQualifications" EntitySet="tblProfessionalQualifications" />
+            <End Role="tblManager" EntitySet="tblManager" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblManage__userI__6F7F8B4B" Association="Self.FK__tblManage__userI__6F7F8B4B">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblManager" EntitySet="tblManager" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblStaff__engega__725BF7F6" Association="Self.FK__tblStaff__engega__725BF7F6">
+            <End Role="tblEngagement" EntitySet="tblEngagement" />
+            <End Role="tblStaff" EntitySet="tblStaff" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblStaff__gender__73501C2F" Association="Self.FK__tblStaff__gender__73501C2F">
+            <End Role="tblGender" EntitySet="tblGender" />
+            <End Role="tblStaff" EntitySet="tblStaff" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblStaff__userId__74444068" Association="Self.FK__tblStaff__userId__74444068">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblStaff" EntitySet="tblStaff" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbHotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblAbsence">
+          <Key>
+            <PropertyRef Name="absenceId" />
+          </Key>
+          <Property Name="absenceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="lastDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="reason" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="statusId" Type="Int32" />
+          <Property Name="staffId" Type="Int32" />
+          <NavigationProperty Name="tblStaff" Relationship="Self.FK__tblAbsenc__staff__79FD19BE" FromRole="tblAbsence" ToRole="tblStaff" />
+          <NavigationProperty Name="tblStatu" Relationship="Self.FK__tblAbsenc__statu__7908F585" FromRole="tblAbsence" ToRole="tblStatus" />
+        </EntityType>
+        <EntityType Name="tblEngagement">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblStaffs" Relationship="Self.FK__tblStaff__engega__725BF7F6" FromRole="tblEngagement" ToRole="tblStaff" />
+        </EntityType>
+        <EntityType Name="tblGender">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblStaffs" Relationship="Self.FK__tblStaff__gender__73501C2F" FromRole="tblGender" ToRole="tblStaff" />
+        </EntityType>
+        <EntityType Name="tblManager">
+          <Key>
+            <PropertyRef Name="managerId" />
+          </Key>
+          <Property Name="managerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="floorNumber" Type="Int32" Nullable="false" />
+          <Property Name="workExperience" Type="Int32" />
+          <Property Name="qualificationId" Type="Int32" />
+          <Property Name="userId" Type="Int32" />
+          <NavigationProperty Name="tblProfessionalQualification" Relationship="Self.FK__tblManage__quali__6E8B6712" FromRole="tblManager" ToRole="tblProfessionalQualifications" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblManage__userI__6F7F8B4B" FromRole="tblManager" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblProfessionalQualification">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblManagers" Relationship="Self.FK__tblManage__quali__6E8B6712" FromRole="tblProfessionalQualifications" ToRole="tblManager" />
+        </EntityType>
+        <EntityType Name="tblStaff">
+          <Key>
+            <PropertyRef Name="staffId" />
+          </Key>
+          <Property Name="staffId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="citizenship" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="salary" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="floorNumber" Type="Int32" Nullable="false" />
+          <Property Name="engegamentId" Type="Int32" />
+          <Property Name="genderId" Type="Int32" />
+          <Property Name="userId" Type="Int32" />
+          <NavigationProperty Name="tblAbsences" Relationship="Self.FK__tblAbsenc__staff__79FD19BE" FromRole="tblStaff" ToRole="tblAbsence" />
+          <NavigationProperty Name="tblEngagement" Relationship="Self.FK__tblStaff__engega__725BF7F6" FromRole="tblStaff" ToRole="tblEngagement" />
+          <NavigationProperty Name="tblGender" Relationship="Self.FK__tblStaff__gender__73501C2F" FromRole="tblStaff" ToRole="tblGender" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblStaff__userId__74444068" FromRole="tblStaff" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblStatu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblAbsences" Relationship="Self.FK__tblAbsenc__statu__7908F585" FromRole="tblStatus" ToRole="tblAbsence" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fullname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblManagers" Relationship="Self.FK__tblManage__userI__6F7F8B4B" FromRole="tblUser" ToRole="tblManager" />
+          <NavigationProperty Name="tblStaffs" Relationship="Self.FK__tblStaff__userId__74444068" FromRole="tblUser" ToRole="tblStaff" />
+        </EntityType>
+        <EntityType Name="vwAbsence">
+          <Key>
+            <PropertyRef Name="fullname" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="floorNumber" />
+            <PropertyRef Name="engagement" />
+            <PropertyRef Name="firstDay" />
+            <PropertyRef Name="lastDay" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="fullname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="floorNumber" Type="Int32" Nullable="false" />
+          <Property Name="engagement" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="firstDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="lastDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="reason" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwStaff">
+          <Key>
+            <PropertyRef Name="fullname" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="dateOfBirth" />
+            <PropertyRef Name="password" />
+            <PropertyRef Name="floorNumber" />
+            <PropertyRef Name="engagement" />
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="fullname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="floorNumber" Type="Int32" Nullable="false" />
+          <Property Name="engagement" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="salary" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="name" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblAbsenc__staff__79FD19BE">
+          <End Role="tblStaff" Type="Self.tblStaff" Multiplicity="0..1" />
+          <End Role="tblAbsence" Type="Self.tblAbsence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStaff">
+              <PropertyRef Name="staffId" />
+            </Principal>
+            <Dependent Role="tblAbsence">
+              <PropertyRef Name="staffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAbsenc__statu__7908F585">
+          <End Role="tblStatus" Type="Self.tblStatu" Multiplicity="0..1" />
+          <End Role="tblAbsence" Type="Self.tblAbsence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblAbsence">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblStaff__engega__725BF7F6">
+          <End Role="tblEngagement" Type="Self.tblEngagement" Multiplicity="0..1" />
+          <End Role="tblStaff" Type="Self.tblStaff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEngagement">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblStaff">
+              <PropertyRef Name="engegamentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblStaff__gender__73501C2F">
+          <End Role="tblGender" Type="Self.tblGender" Multiplicity="0..1" />
+          <End Role="tblStaff" Type="Self.tblStaff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGender">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblStaff">
+              <PropertyRef Name="genderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblManage__quali__6E8B6712">
+          <End Role="tblProfessionalQualifications" Type="Self.tblProfessionalQualification" Multiplicity="0..1" />
+          <End Role="tblManager" Type="Self.tblManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProfessionalQualifications">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblManager">
+              <PropertyRef Name="qualificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblManage__userI__6F7F8B4B">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblManager" Type="Self.tblManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="tblManager">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblStaff__userId__74444068">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblStaff" Type="Self.tblStaff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="tblStaff">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbHotelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblAbsences" EntityType="Self.tblAbsence" />
+          <EntitySet Name="tblEngagements" EntityType="Self.tblEngagement" />
+          <EntitySet Name="tblGenders" EntityType="Self.tblGender" />
+          <EntitySet Name="tblManagers" EntityType="Self.tblManager" />
+          <EntitySet Name="tblProfessionalQualifications" EntityType="Self.tblProfessionalQualification" />
+          <EntitySet Name="tblStaffs" EntityType="Self.tblStaff" />
+          <EntitySet Name="tblStatus" EntityType="Self.tblStatu" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <EntitySet Name="vwAbsences" EntityType="Self.vwAbsence" />
+          <EntitySet Name="vwStaffs" EntityType="Self.vwStaff" />
+          <AssociationSet Name="FK__tblAbsenc__staff__79FD19BE" Association="Self.FK__tblAbsenc__staff__79FD19BE">
+            <End Role="tblStaff" EntitySet="tblStaffs" />
+            <End Role="tblAbsence" EntitySet="tblAbsences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAbsenc__statu__7908F585" Association="Self.FK__tblAbsenc__statu__7908F585">
+            <End Role="tblStatus" EntitySet="tblStatus" />
+            <End Role="tblAbsence" EntitySet="tblAbsences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblStaff__engega__725BF7F6" Association="Self.FK__tblStaff__engega__725BF7F6">
+            <End Role="tblEngagement" EntitySet="tblEngagements" />
+            <End Role="tblStaff" EntitySet="tblStaffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblStaff__gender__73501C2F" Association="Self.FK__tblStaff__gender__73501C2F">
+            <End Role="tblGender" EntitySet="tblGenders" />
+            <End Role="tblStaff" EntitySet="tblStaffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblManage__quali__6E8B6712" Association="Self.FK__tblManage__quali__6E8B6712">
+            <End Role="tblProfessionalQualifications" EntitySet="tblProfessionalQualifications" />
+            <End Role="tblManager" EntitySet="tblManagers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblManage__userI__6F7F8B4B" Association="Self.FK__tblManage__userI__6F7F8B4B">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblManager" EntitySet="tblManagers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblStaff__userId__74444068" Association="Self.FK__tblStaff__userId__74444068">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblStaff" EntitySet="tblStaffs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbHotelModelStoreContainer" CdmEntityContainer="dbHotelEntities">
+          <EntitySetMapping Name="tblAbsences">
+            <EntityTypeMapping TypeName="dbHotelModel.tblAbsence">
+              <MappingFragment StoreEntitySet="tblAbsence">
+                <ScalarProperty Name="absenceId" ColumnName="absenceId" />
+                <ScalarProperty Name="firstDay" ColumnName="firstDay" />
+                <ScalarProperty Name="lastDay" ColumnName="lastDay" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="staffId" ColumnName="staffId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEngagements">
+            <EntityTypeMapping TypeName="dbHotelModel.tblEngagement">
+              <MappingFragment StoreEntitySet="tblEngagement">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblGenders">
+            <EntityTypeMapping TypeName="dbHotelModel.tblGender">
+              <MappingFragment StoreEntitySet="tblGender">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblManagers">
+            <EntityTypeMapping TypeName="dbHotelModel.tblManager">
+              <MappingFragment StoreEntitySet="tblManager">
+                <ScalarProperty Name="managerId" ColumnName="managerId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="floorNumber" ColumnName="floorNumber" />
+                <ScalarProperty Name="workExperience" ColumnName="workExperience" />
+                <ScalarProperty Name="qualificationId" ColumnName="qualificationId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProfessionalQualifications">
+            <EntityTypeMapping TypeName="dbHotelModel.tblProfessionalQualification">
+              <MappingFragment StoreEntitySet="tblProfessionalQualifications">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblStaffs">
+            <EntityTypeMapping TypeName="dbHotelModel.tblStaff">
+              <MappingFragment StoreEntitySet="tblStaff">
+                <ScalarProperty Name="staffId" ColumnName="staffId" />
+                <ScalarProperty Name="citizenship" ColumnName="citizenship" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="floorNumber" ColumnName="floorNumber" />
+                <ScalarProperty Name="engegamentId" ColumnName="engegamentId" />
+                <ScalarProperty Name="genderId" ColumnName="genderId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblStatus">
+            <EntityTypeMapping TypeName="dbHotelModel.tblStatu">
+              <MappingFragment StoreEntitySet="tblStatus">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="dbHotelModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwAbsences">
+            <EntityTypeMapping TypeName="dbHotelModel.vwAbsence">
+              <MappingFragment StoreEntitySet="vwAbsence">
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="floorNumber" ColumnName="floorNumber" />
+                <ScalarProperty Name="engagement" ColumnName="engagement" />
+                <ScalarProperty Name="firstDay" ColumnName="firstDay" />
+                <ScalarProperty Name="lastDay" ColumnName="lastDay" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwStaffs">
+            <EntityTypeMapping TypeName="dbHotelModel.vwStaff">
+              <MappingFragment StoreEntitySet="vwStaff">
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="floorNumber" ColumnName="floorNumber" />
+                <ScalarProperty Name="engagement" ColumnName="engagement" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
