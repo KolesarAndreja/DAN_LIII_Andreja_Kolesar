@@ -14,7 +14,7 @@
                Margin="40,30,0,0"
                VerticalAlignment="Top"
                Width="190" />
-        <TextBox x:Name="txtFullname"
+        <TextBox x:Name="salaryBox"
                  Validation.ErrorTemplate="{StaticResource textBoxErrorTemplate}"
                  HorizontalAlignment="Left"
                  Height="23"
@@ -35,6 +35,7 @@
         </TextBox>
         <Button Content="Save"
                 Command="{Binding save, UpdateSourceTrigger=PropertyChanged}"
+                CommandParameter="{Binding ElementName=salaryBox}"
                 HorizontalAlignment="Left"
                 Height="25"
                 Margin="90,115,0,0"

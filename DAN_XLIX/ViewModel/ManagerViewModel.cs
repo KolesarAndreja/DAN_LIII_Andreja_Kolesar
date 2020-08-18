@@ -87,12 +87,20 @@ namespace DAN_XLIX.ViewModel
         {
             try
             {
-                AddSalary add = new AddSalary(staff, currentManager);
-                add.ShowDialog();
-                if ((add.DataContext as AddSalaryViewModel).isUpdated == true)
+                if(staff.engagement == "supervising" || staff.engagement == "reporting")
                 {
-                    staffList = Service.Service.GetFloorEmployees(currentManager.floorNumber);
+                    AddSalary add = new AddSalary(staff, currentManager);
+                    add.ShowDialog();
+                    if ((add.DataContext as AddSalaryViewModel).isUpdated == true)
+                    {
+                        staffList = Service.Service.GetFloorEmployees(currentManager.floorNumber);
+                    }
                 }
+                else
+                {
+                    MessageBox.Show("You can edit salary only for employee with supervising or reporting engagement");
+                }
+         
             }
             catch (Exception ex)
             {

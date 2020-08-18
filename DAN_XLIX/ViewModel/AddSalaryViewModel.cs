@@ -2,11 +2,8 @@
 using DAN_XLIX.Service;
 using DAN_XLIX.View;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace DAN_XLIX.ViewModel
@@ -97,13 +94,13 @@ namespace DAN_XLIX.ViewModel
             {
                 if (_save == null)
                 {
-                    _save = new RelayCommand(param => SaveExecute(), param => CanSaveExecute());
+                    _save = new RelayCommand(SaveExecute, CanSaveExecute);
                 }
                 return _save;
             }
         }
 
-        private void SaveExecute()
+        private void SaveExecute(object obj)
         {
             try
             {
@@ -118,8 +115,14 @@ namespace DAN_XLIX.ViewModel
             }
         }
 
-        private bool CanSaveExecute()
+        private bool CanSaveExecute(object obj)
         {
+            string currentText = (obj as TextBox).Text;
+            bool b = int.TryParse(currentText, out int n);
+            if (!b || n<2 || n>999)
+            {
+                return false;
+            }
             return true;
 
         }

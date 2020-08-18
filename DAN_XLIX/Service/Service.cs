@@ -177,6 +177,23 @@ namespace DAN_XLIX.Service
             }
         }
 
+        public static string getEngagmentName(int? id)
+        {
+            try
+            {
+                using (dbHotelEntities context = new dbHotelEntities())
+                {
+                    tblEngagement res = (from x in context.tblEngagements where x.id == id select x).FirstOrDefault();
+                    return res.name;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
+                return null;
+            }
+        }
+
         #endregion
 
         #region ADD USER

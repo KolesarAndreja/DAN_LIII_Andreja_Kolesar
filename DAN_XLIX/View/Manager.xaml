@@ -51,7 +51,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Name="btnEditUser"
-                                    Content="Add salary"
+                                    Content="Change salary"
                                     Command="{Binding DataContext.addSalary, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
                                     Margin="4"
                                     FontWeight="Bold" />
