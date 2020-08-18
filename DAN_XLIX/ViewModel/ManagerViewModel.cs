@@ -3,8 +3,10 @@ using DAN_XLIX.Service;
 using DAN_XLIX.View;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -64,12 +66,59 @@ namespace DAN_XLIX.ViewModel
             managerWindow = open;
             currentManager = man;
             staffList = Service.Service.GetFloorEmployees(currentManager.floorNumber);
-
         }
         #endregion
 
 
         #region salary
+        private ICommand _allSalary;
+        public ICommand allSalary
+        {
+            get
+            {
+                if (_allSalary == null)
+                {
+                    _allSalary = new RelayCommand(param => AllSalaryExecute(), param => CanAllSalaryExecute());
+                }
+                return _allSalary;
+            }
+        }
+        private void AllSalaryExecute()
+        {
+            try
+            {
+                if (staffList.Count != 0)
+                {
+                    AddSalary add = new AddSalary(staffList, currentManager);
+                    add.ShowDialog();
+                    if ((add.DataContext as AddSalaryViewModel).isUpdated == true)
+                    {
+                        staffList = Service.Service.GetFloorEmployees(currentManager.floorNumber);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Empty list of yours employees");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        private bool CanAllSalaryExecute()
+        {
+            return true;
+        }
+
+
+
+
+
+
+
+
         private ICommand _addSalary;
         public ICommand addSalary
         {
@@ -111,6 +160,7 @@ namespace DAN_XLIX.ViewModel
         {
             return true;
         }
+
         #endregion
 
         #region log out
@@ -147,5 +197,7 @@ namespace DAN_XLIX.ViewModel
             return true;
         }
         #endregion
+
+       
     }
 }

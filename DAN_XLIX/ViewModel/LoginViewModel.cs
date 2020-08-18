@@ -72,7 +72,6 @@ namespace DAN_XLIX.ViewModel
                     case "staff":
                         tblStaff st = Service.Service.getStaff(currentUser.userId);
                         Staff s = new Staff();
-                        login.Close();
                         s.ShowDialog();
                         break;
                     case "manager":

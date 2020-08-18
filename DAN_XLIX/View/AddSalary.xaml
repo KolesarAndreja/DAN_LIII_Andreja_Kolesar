@@ -6,7 +6,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DAN_XLIX.View"
         mc:Ignorable="d"
-        Title="AddSalary" Height="200" Width="300">
+        Title="AddSalary"
+        Height="200"
+        Width="300">
     <Grid>
         <Label Content="Number between 1 and 1000:"
                HorizontalAlignment="Left"
@@ -38,8 +40,13 @@
                 CommandParameter="{Binding ElementName=salaryBox}"
                 HorizontalAlignment="Left"
                 Height="25"
-                Margin="90,115,0,0"
+                Margin="95,95,0,0"
                 VerticalAlignment="Top"
                 Width="100" />
+        <!--<ProgressBar Value="{Binding Percent, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                     Margin="45,140,32,504" />
+        <Label Content="{Binding Message, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+               HorizontalAlignment="Center"
+               Margin="145,130,137,494" />-->
     </Grid>
 </Window>

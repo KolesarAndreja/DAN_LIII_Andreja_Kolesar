@@ -1,5 +1,6 @@
 ﻿using DAN_XLIX.Service;
 using DAN_XLIX.ViewModel;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace DAN_XLIX.View
@@ -13,6 +14,12 @@ namespace DAN_XLIX.View
         {
             InitializeComponent();
             this.DataContext = new AddSalaryViewModel(this, staff,man);
+        }
+
+        public AddSalary(List<vwStaff> staff, tblManager man)
+        {
+            InitializeComponent();
+            this.DataContext = new AddSalaryViewModel(this, staff, man);
         }
     }
 }
