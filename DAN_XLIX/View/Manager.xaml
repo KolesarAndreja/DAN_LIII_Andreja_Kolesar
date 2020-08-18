@@ -5,9 +5,67 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DAN_XLIX.View"
         mc:Ignorable="d"
-        Title="Manager" Height="650
-        " Width="800">
+        Title="Manager"
+        Height="650
+        "
+        Width="800">
     <Grid>
-
+        <Label Content="MY EMPLOYEES:"
+               HorizontalAlignment="Left"
+               Margin="20,30,0,0"
+               VerticalAlignment="Top"
+               Width="265"
+               FontStyle="Italic" />
+        <Button Content="Log Out"
+                Command="{Binding logOut, UpdateSourceTrigger=PropertyChanged}"
+                HorizontalAlignment="Left"
+                Height="22"
+                Margin="610,15,0,0"
+                VerticalAlignment="Top"
+                Width="115" />
+        <DataGrid Name="DataGridAllDoctors"
+                  ItemsSource="{Binding staffList, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding staff, UpdateSourceTrigger=PropertyChanged}"
+                  IsReadOnly="True"
+                  HeadersVisibility="Column"
+                  AutoGenerateColumns="False"
+                  HorizontalGridLinesBrush="Black"
+                  BorderBrush="Black"
+                  Foreground="Black"
+                  FontWeight="Bold"
+                  Margin="45,62,72,134">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Fullname"
+                                    Binding="{Binding fullname}" />
+                <DataGridTextColumn Header="Username"
+                                    Binding="{Binding username}" />
+                <DataGridTextColumn Header="Date of Birth"
+                                    Binding="{Binding dateOfBirth}" />
+                <DataGridTextColumn Header="Email"
+                                    Binding="{Binding email}" />
+                <DataGridTextColumn Header="Engagement"
+                                    Binding="{Binding engagement}" />
+                <DataGridTextColumn Header="Salary"
+                                    Binding="{Binding salary}" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="btnEditUser"
+                                    Content="Add salary"
+                                    Command="{Binding DataContext.addSalary, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                    Margin="4"
+                                    FontWeight="Bold" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Change salary for all employees"
+                Command="{Binding allSalary, UpdateSourceTrigger=PropertyChanged}"
+                HorizontalAlignment="Left"
+                Height="22"
+                Margin="355,15,0,0"
+                VerticalAlignment="Top"
+                Width="215" />
     </Grid>
 </Window>

@@ -54,6 +54,129 @@ namespace DAN_XLIX.Service
                 return null;
             }
         }
+
+
+        public static tblManager getManager(int userId)
+        {
+            try
+            {
+                using (dbHotelEntities context = new dbHotelEntities())
+                {
+                    tblManager res = (from x in context.tblManagers where x.userId == userId select x).FirstOrDefault();
+                    return res;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
+                return null;
+            }
+        }
+
+
+
+        public static tblStaff getStaff(int userId)
+        {
+            try
+            {
+                using (dbHotelEntities context = new dbHotelEntities())
+                {
+                    tblStaff res = (from x in context.tblStaffs where x.userId == userId select x).FirstOrDefault();
+                    return res;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
+                return null;
+            }
+        }
+
+        public static tblStaff getStaff(vwStaff s)
+        {
+            try
+            {
+                using (dbHotelEntities context = new dbHotelEntities())
+                {
+                    tblUser user = (from x in context.tblUsers where x.username == s.username select x).FirstOrDefault();
+                    tblStaff res = (from x in context.tblStaffs where x.userId == user.userId select x).FirstOrDefault();
+                    return res;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
+                return null;
+            }
+        }
+        #endregion
+
+
+
+
+        #region get qualification
+        public static string getGenderString(int? id)
+        {
+            try
+            {
+                using (dbHotelEntities context = new dbHotelEntities())
+                {
+                    tblGender res = (from x in context.tblGenders where x.id == id select x).FirstOrDefault();
+                    return res.name;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
+                return null;
+            }
+        }
+
+        public static int getQualificationNumber(int? id)
+        {
+            try
+            {
+                using (dbHotelEntities context = new dbHotelEntities())
+                {
+                    tblProfessionalQualification res = (from x in context.tblProfessionalQualifications where x.id == id select x).FirstOrDefault();
+                    int q;
+                    switch (res.name)
+                    {
+                        case "I":
+                            q = 1;
+                            break;
+                        case "II":
+                            q = 2;
+                            break;
+                        case "III":
+                            q = 3;
+                            break;
+                        case "IV":
+                            q = 4;
+                            break;
+                        case "V":
+                            q = 5;
+                            break;
+                        case "VI":
+                            q = 6;
+                            break;
+                        case "VII":
+                            q = 7;
+                            break;
+                        default:
+                            q = 0;
+                            break;
+                    }
+                    return q;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
+                return 0;
+            }
+        }
+
         #endregion
 
         #region ADD USER
@@ -141,7 +264,14 @@ namespace DAN_XLIX.Service
                         staff.staffId = newStaff.staffId;
                         return staff;
                     }
-                    return staff;
+                    else
+                    {
+
+                        tblStaff staffToEdit = (from x in context.tblStaffs where x.staffId == staff.staffId select x).FirstOrDefault();
+                        staffToEdit.salary = staff.salary;
+                        context.SaveChanges();
+                        return staff;
+                    }
                 }
             }
             catch (Exception ex)
@@ -199,6 +329,25 @@ namespace DAN_XLIX.Service
                 {
                     List<tblEngagement> list = new List<tblEngagement>();
                     list = (from x in context.tblEngagements select x).ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
+
+        public static List<vwStaff> GetFloorEmployees(int n)
+        {
+            try
+            {
+                using (dbHotelEntities context = new dbHotelEntities())
+                {
+                    List<vwStaff> list = new List<vwStaff>();
+                    list = (from x in context.vwStaffs  where x.floorNumber == n select x).ToList();
                     return list;
                 }
             }

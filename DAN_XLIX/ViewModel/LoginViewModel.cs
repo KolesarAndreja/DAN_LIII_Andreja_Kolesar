@@ -70,12 +70,14 @@ namespace DAN_XLIX.ViewModel
                 switch (person.role)
                 {
                     case "staff":
+                        tblStaff st = Service.Service.getStaff(currentUser.userId);
                         Staff s = new Staff();
                         login.Close();
                         s.ShowDialog();
                         break;
                     case "manager":
-                        Manager m = new Manager();
+                        tblManager man = Service.Service.getManager(currentUser.userId);
+                        Manager m = new Manager(man);
                         login.Close();
                         m.ShowDialog();
                         break;
